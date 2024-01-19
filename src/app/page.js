@@ -1,10 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const clickHan = async () => {
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      body: JSON.stringify({ email: "was", password: "123" }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+    if (res.ok){
+      alert("ok")
+    }else{
+      alert("notok")
+    }
+  }
   return (
     <main className={styles.main}>
       <div className={styles.description}>
+        <button onClick={clickHan}>submit</button>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>src/app/page.js</code>

@@ -1,4 +1,4 @@
-const { app } = require("@/firebase-config");
+const { app } = require("@/app/firebase-config");
 import { compare, hash } from "bcryptjs";
 import { getDatabase, ref, set, onValue ,push} from "firebase/database";
 
@@ -31,7 +31,7 @@ export async function getByPassword(password, hashpassword) {
     return confirmPassword
 }
 
-export async function addData(email, password,check) {
+export async function addData(email, password) {
     let found = await getByEmail(email)
     if (found) {
         throw new Error("User already exists.");
@@ -42,6 +42,5 @@ export async function addData(email, password,check) {
     set(newDocumentRef,{
         email,
         password: hashedPassword,
-        check,
     });
 }
