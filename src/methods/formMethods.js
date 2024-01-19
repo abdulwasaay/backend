@@ -31,7 +31,7 @@ export async function getByPassword(password, hashpassword) {
     return confirmPassword
 }
 
-export async function addData(name, email, password, image) {
+export async function addData(email, password,check) {
     let found = await getByEmail(email)
     if (found) {
         throw new Error("User already exists.");
@@ -40,7 +40,8 @@ export async function addData(name, email, password, image) {
     const newDocumentRef = push(ref(db, "users"));
     const hashedPassword = await hash(password, 12);
     set(newDocumentRef,{
-        name, email,
-        password: hashedPassword, image,
+        email,
+        password: hashedPassword,
+        check,
     });
 }
